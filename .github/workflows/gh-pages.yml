@@ -1,3 +1,4 @@
+# Example: https://github.com/rodrigokamada/angular-github-actions
 name: GitHub Pages
 
 on:
@@ -31,5 +32,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist/angular-github-actions
+          publish_dir: dist/olivrya
           enable_jekyll: true
