@@ -1,0 +1,1 @@
+import{Ca as r,Fa as s,S as o,xa as a,ya as i}from"./chunk-7HQCRPYS.js";var p=(()=>{let e=class e{};e.\u0275fac=function(n){return new(n||e)},e.\u0275cmp=o({type:e,selectors:[["olivrya-arts"]],standalone:!0,features:[s],decls:2,vars:0,template:function(n,l){n&1&&(a(0,"p"),r(1,"arts works!"),i())},changeDetection:0});let t=e;return t})();export{p as ArtsComponent};
