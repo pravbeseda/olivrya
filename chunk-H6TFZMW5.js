@@ -1,1 +1,0 @@
-import{Ca as r,Fa as c,S as i,xa as o,ya as a}from"./chunk-7HQCRPYS.js";var p=(()=>{let e=class e{};e.\u0275fac=function(n){return new(n||e)},e.\u0275cmp=i({type:e,selectors:[["olivrya-main"]],standalone:!0,features:[c],decls:2,vars:0,template:function(n,m){n&1&&(o(0,"p"),r(1,"main works!"),a())},changeDetection:0});let t=e;return t})();export{p as MainComponent};
