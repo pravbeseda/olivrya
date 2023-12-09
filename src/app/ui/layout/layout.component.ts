@@ -12,7 +12,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 export class LayoutComponent {
   public readonly navItems = [
     {
-      label: 'Home',
+      label: 'Главная',
       path: '',
     },
     {
