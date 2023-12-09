@@ -6,7 +6,8 @@
     "start": "nx serve",
     "build": "nx build",
     "build:ci": "nx build olivrya --base-href https://pravbeseda.github.io/olivrya/ && cp dist/olivrya/browser/index.html dist/olivrya/browser/404.html",
-    "test": "nx test"
+    "test": "nx test",
+    "lint": "nx lint"
   },
   "private": true,
   "dependencies": {
@@ -20,6 +21,8 @@
     "@angular/router": "~17.0.0",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@nx/angular": "17.1.3",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.0"

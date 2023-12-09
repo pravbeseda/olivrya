@@ -1,5 +1,4 @@
 import { Spectator, createComponentFactory } from '@ngneat/spectator/jest';
-
 import { AppComponent } from './app.component';
 import { mockProvider } from '@ngneat/spectator';
 import { ActivatedRoute } from '@angular/router';
