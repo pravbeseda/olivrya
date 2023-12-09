@@ -16,7 +16,7 @@ export class LayoutComponent {
       path: '',
     },
     {
-      label: 'Arts',
+      label: 'Творчество',
       path: 'arts',
     },
   ];
