@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'olivrya-main',
+  selector: 'olivrya-games',
   standalone: true,
   imports: [],
-  templateUrl: './main.component.html',
-  styleUrl: './main.component.scss',
+  templateUrl: './games.component.html',
+  styleUrl: './games.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainComponent {}
+export class GamesComponent {}
