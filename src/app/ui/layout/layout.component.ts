@@ -12,6 +12,10 @@ import { NavbarComponent } from '../navbar/navbar.component';
 export class LayoutComponent {
   public readonly navItems = [
     {
+      label: 'Мини-игры',
+      path: 'games',
+    },
+    {
       label: 'Главная',
       path: '',
     },

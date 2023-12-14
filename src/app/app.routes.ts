@@ -11,4 +11,9 @@ export const appRoutes: Route[] = [
     loadComponent: () =>
       import('./arts/arts.component').then((mod) => mod.ArtsComponent),
   },
+  {
+    path: 'games',
+    loadComponent: () =>
+      import('./games/games.component').then((mod) => mod.GamesComponent),
+  },
 ];
