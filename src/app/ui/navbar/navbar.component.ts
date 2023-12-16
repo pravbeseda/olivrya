@@ -23,13 +23,11 @@ interface NavItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
-  @Input() navItems: NavItem[] = [];
+  @Input() public navItems: NavItem[] = [];
   public isCollapsed = true;
   private readonly offcanvasService = inject(NgbOffcanvas);
 
   open(content: TemplateRef<any>) {
-    this.offcanvasService.open(content, {
-      ariaLabelledBy: 'offcanvas-basic-title',
-    });
+    this.offcanvasService.open(content);
   }
 }
