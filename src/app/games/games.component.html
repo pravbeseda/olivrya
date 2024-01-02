@@ -1,3 +1,5 @@
 <h1>Мини-игры</h1>
 
-<olivrya-card *ngFor="let item of games" />
+@for (item of games$ | async; track item.id) {
+    <olivrya-card [title]="item.title"></olivrya-card>
+}
