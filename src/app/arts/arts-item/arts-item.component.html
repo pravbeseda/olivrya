@@ -1,0 +1,5 @@
+@if(artsItem$ | async; as item) {
+    {{ item.title }}
+
+    <img class="image" [src]="'assets/arts/' + item.id + '.jpg'">
+}

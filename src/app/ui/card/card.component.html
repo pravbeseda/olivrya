@@ -1,3 +1,8 @@
-<div class="card float-start" [style.background-image]="image">
+<div
+  class="card float-start"
+  role="button"
+  [style.background-image]="image"
+  [routerLink]="id.toString()"
+>
   <div class="title">{{ title }}</div>
 </div>

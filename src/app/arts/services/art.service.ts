@@ -10,4 +10,8 @@ export class ArtService {
   public getArts(): Observable<Art[]> {
     return this.artApiService.getArts();
   }
+
+  public getArtsItem(id: number): Observable<Art> {
+    return this.artApiService.getArtsItem(id);
+  }
 }
