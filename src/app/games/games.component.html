@@ -1,5 +1,8 @@
 <h1>Мини-игры</h1>
 
 @for (item of games$ | async; track item.id) {
-    <olivrya-card [title]="item.title"></olivrya-card>
+<olivrya-card
+  [title]="item.title"
+  [image]="'url(assets/games/' + item.id + '.png)'"
+></olivrya-card>
 }
