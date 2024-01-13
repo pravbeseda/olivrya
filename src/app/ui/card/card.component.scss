@@ -2,4 +2,23 @@
   height: 16rem;
   width: 16rem;
   margin: 0 4rem 4rem 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .title {
+    visibility: hidden;
+    position: absolute;
+    color: rgb(212, 212, 212);
+    background-color: rgba(50, 50, 50, 0.5);
+    padding: 0.6rem;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &:hover {
+    .title {
+      visibility: visible;
+    }
+  }
 }

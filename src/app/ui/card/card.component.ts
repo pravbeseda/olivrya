@@ -6,9 +6,13 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   imports: [],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
-  @Input()
-  public title: string = ""
+  @Input() public title: string = '';
+  @Input() public image: string = '';
+
+  constructor() {
+    // console.log(this.title, this.image);
+  }
 }
