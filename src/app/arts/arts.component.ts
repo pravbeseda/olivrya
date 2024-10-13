@@ -10,11 +10,10 @@ import { CardComponent } from '../ui/card/card.component';
   providers: [ArtService],
   templateUrl: './arts.component.html',
   styleUrl: './arts.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArtsComponent {
   public readonly arts$ = this.artService.getArts();
 
   constructor(private readonly artService: ArtService) {}
-
 }

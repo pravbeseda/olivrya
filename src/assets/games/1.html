@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Гонки</title>
+    <style>
+      img {
+        width: 50px;
+        height: 100px;
+      }
+      .nameTag {
+        position: absolute;
+        font-size: 1em;
+        color: black;
+        font-weight: bold;
+      }
+      #finishLine {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 10px;
+        height: 100%;
+        background-color: red;
+        display: none; /* Финишная линия скрыта по умолчанию */
+      }
+      #message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2em;
+        display: none;
+      }
+      #setup {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 1.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="finishLine"></div>
+    <div id="message"></div>
+    <div id="setup">
+      <label>
+        Имя игрока 1:
+        <input
+          type="text"
+          id="player1Name"
+          placeholder="Игрок 1"
+        />
+      </label>
+      <label>
+        Имя игрока 2:
+        <input
+          type="text"
+          id="player2Name"
+          placeholder="Игрок 2"
+        />
+      </label>
+      <button id="startButton">Начать гонку</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script>
+      var Car = function (x, y, playerName) {
+        this.x = x;
+        this.y = y;
+        this.speed = 5;
+        this.finished = false;
+        this.playerName = playerName; // Имя игрока
+        this.draw();
+      };
+
+      Car.prototype.draw = function () {
+        var carHtml = '<img src="images/car.png">';
+        var nameTagHtml = '<div class="nameTag">' + this.playerName + '</div>';
+        this.carElement = $(carHtml);
+        this.nameTagElement = $(nameTagHtml);
+
+        this.carElement.css({
+          position: 'absolute',
+          left: this.x,
+          top: this.y,
+        });
+
+        this.nameTagElement.css({
+          left: this.x,
+          top: this.y - 20, // Имя отображается над машиной
+        });
+
+        $('body').append(this.carElement);
+        $('body').append(this.nameTagElement);
+      };
+
+      Car.prototype.moveRight = function (shift) {
+        this.x += shift;
+        this.carElement.css({
+          left: this.x,
+          top: this.y,
+        });
+        this.nameTagElement.css({
+          left: this.x,
+          top: this.y - 20,
+        });
+      };
+
+      var getRandomNumber = function (size) {
+        return Math.floor(Math.random(1) * size);
+      };
+
+      var finishLineX = window.innerWidth - 60; // Координата финишной линии
+      var gameDuration = 15; // Время на завершение игры в секундах
+      var tesla, nissan;
+      var teslaInterval, nissanInterval, timerInterval;
+      var timeRemaining = gameDuration;
+      var player1Name = '';
+      var player2Name = '';
+
+      function checkFinish(car) {
+        if (car.x >= finishLineX) {
+          car.finished = true;
+        }
+      }
+
+      function endGame(winner) {
+        clearInterval(teslaInterval);
+        clearInterval(nissanInterval);
+        clearInterval(timerInterval);
+        $('#message')
+          .text(winner + ' выиграл(а)!')
+          .show();
+      }
+
+      function checkGameOver() {
+        if (tesla.finished || nissan.finished) {
+          endGame(tesla.finished ? player1Name : player2Name);
+        }
+      }
+
+      function startRace() {
+        tesla = new Car(20, 20, player1Name);
+        nissan = new Car(20, 200, player2Name);
+
+        teslaInterval = setInterval(function () {
+          if (!tesla.finished) {
+            tesla.moveRight(getRandomNumber(8));
+            checkFinish(tesla);
+            checkGameOver();
+          }
+        }, 30);
+
+        nissanInterval = setInterval(function () {
+          if (!nissan.finished) {
+            nissan.moveRight(getRandomNumber(8));
+            checkFinish(nissan);
+            checkGameOver();
+          }
+        }, 30);
+
+        // Таймер игры
+        timerInterval = setInterval(function () {
+          timeRemaining--;
+          if (timeRemaining <= 0) {
+            clearInterval(teslaInterval);
+            clearInterval(nissanInterval);
+            clearInterval(timerInterval);
+            if (!tesla.finished && !nissan.finished) {
+              $('#message').text('Время вышло! Никто не выиграл!').show();
+            }
+          }
+        }, 1000);
+      }
+
+      // Обработчик нажатия кнопки "Готово"
+      $('#startButton').click(function () {
+        player1Name = $('#player1Name').val() || 'Игрок 1';
+        player2Name = $('#player2Name').val() || 'Игрок 2';
+        $('#setup').hide();
+        $('#finishLine').show(); // Показать финишную линию при старте гонки
+        startRace();
+      });
+    </script>
+  </body>
+</html>

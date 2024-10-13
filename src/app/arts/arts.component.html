@@ -1,9 +1,10 @@
 <h1>Моё творчество</h1>
 
 @for (item of arts$ | async; track item.id) {
-<olivrya-card
-  [title]="item.title"
-  [image]="'url(assets/arts/' + item.id + '.jpg)'"
-  [id]="item.id"  
-></olivrya-card>
+  <olivrya-card
+    [title]="item.title"
+    [image]="'url(assets/arts/' + item.id + '.jpg)'"
+    [id]="item.id"
+  ></olivrya-card>
 }
+

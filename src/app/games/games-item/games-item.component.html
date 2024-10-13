@@ -1,0 +1,10 @@
+@if (gamesItem$ | async; as item) {
+  {{ item.title }}
+  <iframe
+    width="100%"
+    height="300"
+    frameBorder="0"
+    allowfullscreen
+    [src]="item.htmlPath | safe: 'resourceUrl'"
+  ></iframe>
+}

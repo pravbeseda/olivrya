@@ -1,5 +1,18 @@
-@if(artsItem$ | async; as item) {
-    {{ item.title }}
+<a href="#"> <- </a>
 
-    <img class="image" [src]="'assets/arts/' + item.id + '.jpg'">
+@if (artsItem$ | async; as item) {
+  <div class="art-item">
+    <img
+      class="image"
+      [src]="'assets/arts/' + item.id + '.jpg'"
+    />
+    <div class="description">
+      <h2>{{ item.title }}</h2>
+
+      <div class="text">
+        Описание Описание Описание Описание Описание Описание Описание Описание
+        Описание Описание Описание Описание
+      </div>
+    </div>
+  </div>
 }

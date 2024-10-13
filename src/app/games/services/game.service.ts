@@ -10,4 +10,8 @@ export class GameService {
   public getGames(): Observable<Game[]> {
     return this.gameApiService.getGames();
   }
+
+  public getGamesItem(id: number): Observable<Game> {
+    return this.gameApiService.getGamesItem(id);
+  }
 }

@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Виселица</title>
+  </head>
+  <body>
+    <label for="inputText">Введите букву:</label>
+    <input
+      type="text"
+      id="inputText"
+      name="inputText"
+    />
+    <button
+      type="button"
+      onclick="textInput()"
+    >
+      Отправить
+    </button>
+    <canvas
+      id="canvas"
+      width="100"
+      height="120"
+      style="border: 1px solid #000"
+    ></canvas>
+
+    <div id="hangman"></div>
+
+    <script>
+      const words = [
+        'яблоко',
+        'программа',
+        'макака',
+        'рычаг',
+        'мама',
+        'куртка',
+        'электричество',
+        'кукуруза',
+        'кровать',
+        'манго',
+      ];
+      let randomWord = words[Math.floor(Math.random() * words.length)];
+      let wordArray = randomWord.split('');
+      let displayArray = new Array(wordArray.length).fill('_');
+      let attempts = 10;
+      let hangmanState = 0;
+
+      function updateHangman() {
+        document.getElementById('hangman').innerHTML =
+          `Слово: ${displayArray.join(' ')}<br>`;
+        document.getElementById('hangman').innerHTML +=
+          `Осталось попыток: ${attempts}<br>`;
+        drawHangman();
+
+        // Проверка на окончание игры
+        if (attempts === 0) {
+          alert('Вы проиграли! Слово было: ' + randomWord);
+        } else if (!displayArray.includes('_')) {
+          alert('Поздравляю! Вы угадали слово: ' + randomWord);
+        }
+      }
+
+      function drawHangman() {
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = 'black';
+        ctx.beginPath();
+
+        switch (hangmanState) {
+          case 1: // Head
+            ctx.arc(50, 40, 10, 0, 2 * Math.PI);
+            break;
+          case 2: // Body
+            ctx.arc(50, 40, 10, 0, 2 * Math.PI);
+            ctx.moveTo(50, 50);
+            ctx.lineTo(50, 80);
+            break;
+          case 3: // Left Arm
+            ctx.arc(50, 40, 10, 0, 2 * Math.PI);
+            ctx.moveTo(50, 50);
+            ctx.lineTo(50, 80);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(40, 70);
+            break;
+          case 4: // Right Arm
+            ctx.arc(50, 40, 10, 0, 2 * Math.PI);
+            ctx.moveTo(50, 50);
+            ctx.lineTo(50, 80);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(40, 70);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(60, 70);
+            break;
+          case 5: // Left Leg
+            ctx.arc(50, 40, 10, 0, 2 * Math.PI);
+            ctx.moveTo(50, 50);
+            ctx.lineTo(50, 80);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(40, 70);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(60, 70);
+            ctx.moveTo(50, 80);
+            ctx.lineTo(40, 100);
+            break;
+          case 6: // Right Leg
+            ctx.arc(50, 40, 10, 0, 2 * Math.PI);
+            ctx.moveTo(50, 50);
+            ctx.lineTo(50, 80);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(40, 70);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(60, 70);
+            ctx.moveTo(50, 80);
+            ctx.lineTo(40, 100);
+            ctx.moveTo(50, 80);
+            ctx.lineTo(60, 100);
+            break;
+          case 7: // Base
+            ctx.arc(50, 40, 10, 0, 2 * Math.PI);
+            ctx.moveTo(50, 50);
+            ctx.lineTo(50, 80);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(40, 70);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(60, 70);
+            ctx.moveTo(50, 80);
+            ctx.lineTo(40, 100);
+            ctx.moveTo(50, 80);
+            ctx.lineTo(60, 100);
+            ctx.moveTo(10, 110);
+            ctx.lineTo(90, 110);
+            break;
+          case 8: // Pole
+            ctx.arc(50, 40, 10, 0, 2 * Math.PI);
+            ctx.moveTo(50, 50);
+            ctx.lineTo(50, 80);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(40, 70);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(60, 70);
+            ctx.moveTo(50, 80);
+            ctx.lineTo(40, 100);
+            ctx.moveTo(50, 80);
+            ctx.lineTo(60, 100);
+            ctx.moveTo(20, 110);
+            ctx.lineTo(20, 10);
+            ctx.moveTo(10, 110);
+            ctx.lineTo(90, 110);
+            break;
+          case 9: // Beam
+            ctx.arc(50, 40, 10, 0, 2 * Math.PI);
+            ctx.moveTo(50, 50);
+            ctx.lineTo(50, 80);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(40, 70);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(60, 70);
+            ctx.moveTo(50, 80);
+            ctx.lineTo(40, 100);
+            ctx.moveTo(50, 80);
+            ctx.lineTo(60, 100);
+            ctx.moveTo(20, 10);
+            ctx.lineTo(50, 10);
+            ctx.moveTo(10, 110);
+            ctx.lineTo(90, 110);
+            ctx.moveTo(20, 110);
+            ctx.lineTo(20, 10);
+            break;
+          case 10: // Rope
+            ctx.arc(50, 40, 10, 0, 2 * Math.PI);
+            ctx.moveTo(50, 50);
+            ctx.lineTo(50, 80);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(40, 70);
+            ctx.moveTo(50, 55);
+            ctx.lineTo(60, 70);
+            ctx.moveTo(50, 80);
+            ctx.lineTo(40, 100);
+            ctx.moveTo(50, 80);
+            ctx.lineTo(60, 100);
+            ctx.moveTo(50, 10);
+            ctx.lineTo(50, 30);
+            ctx.moveTo(10, 110);
+            ctx.lineTo(90, 110);
+            ctx.moveTo(20, 110);
+            ctx.lineTo(20, 10);
+            ctx.moveTo(20, 10);
+            ctx.lineTo(50, 10);
+            break;
+        }
+
+        ctx.stroke();
+      }
+
+      function textInput() {
+        let guessedLetter = document
+          .getElementById('inputText')
+          .value.toLowerCase();
+        document.getElementById('inputText').value = ''; // Очистить поле ввода
+
+        if (guessedLetter.length !== 1 || !/[а-я]/.test(guessedLetter)) {
+          alert('Пожалуйста, введите одну букву.');
+          return;
+        }
+
+        if (wordArray.includes(guessedLetter)) {
+          for (let i = 0; i < wordArray.length; i++) {
+            if (wordArray[i] === guessedLetter) {
+              displayArray[i] = guessedLetter;
+            }
+          }
+        } else {
+          attempts--;
+          hangmanState++;
+        }
+
+        updateHangman();
+      }
+
+      updateHangman(); // Начало игры
+    </script>
+  </body>
+</html>
