@@ -1,0 +1,9 @@
+:host {
+  padding-top: 30px;
+  display: flex;
+  gap: 20px;
+
+  .game-item {
+    flex-grow: 1;
+  }
+}

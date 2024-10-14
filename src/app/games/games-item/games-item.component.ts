@@ -1,10 +1,11 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { GameService } from '../services/game.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { SafePipe } from 'src/app/utils/safe.pipe';
+import { ButtonBackComponent } from 'src/app/ui/buttons/button-back/button-back.component';
 
 interface GamePrepared extends Game {
   htmlPath: string;
@@ -13,7 +14,7 @@ interface GamePrepared extends Game {
 @Component({
   selector: 'olivrya-games-item',
   standalone: true,
-  imports: [AsyncPipe, SafePipe],
+  imports: [AsyncPipe, SafePipe, RouterModule, ButtonBackComponent],
   providers: [GameService],
   templateUrl: './games-item.component.html',
   styleUrl: './games-item.component.scss',
